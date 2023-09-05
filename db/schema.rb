@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_185544) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_190454) do
+  create_table "activities", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.string "action_type"
+    t.string "status"
+    t.boolean "includes_duration"
+    t.boolean "includes_content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
+  create_table "boolean_entries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "performed_at"
+    t.boolean "completed"
+    t.boolean "recorded"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -19,4 +41,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_185544) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "activities", "users"
 end
