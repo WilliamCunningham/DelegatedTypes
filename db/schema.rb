@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_190454) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_202125) do
   create_table "activities", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
+    t.string "data_name"
     t.string "action_type"
     t.string "status"
     t.boolean "includes_duration"
@@ -33,6 +34,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_190454) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "datum_entries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "performed_at"
+    t.boolean "completed"
+    t.boolean "recorded"
+    t.integer "duration"
+    t.integer "datum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "activity_id_id", null: false
+    t.datetime "performed_at"
+    t.integer "duration"
+    t.boolean "recorded"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id_id"], name: "index_entries_on_activity_id_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -42,4 +64,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_190454) do
   end
 
   add_foreign_key "activities", "users"
+  add_foreign_key "entries", "activity_ids"
 end
