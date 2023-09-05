@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  action_type: MyString
+  status: MyString
+  includes_duration: false
+  includes_content: false
+
+two:
+  user: two
+  name: MyString
+  action_type: MyString
+  status: MyString
+  includes_duration: false
+  includes_content: false
