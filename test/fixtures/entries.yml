@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activity_id: one
+  performed_at: 2023-09-05 16:21:25
+  duration: 1
+  recorded: false
+
+two:
+  activity_id: two
+  performed_at: 2023-09-05 16:21:25
+  duration: 1
+  recorded: false
