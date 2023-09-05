@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  performed_at: 2023-09-05 15:04:55
+  completed: false
+  recorded: false
+  duration: 1
+
+two:
+  name: MyString
+  performed_at: 2023-09-05 15:04:55
+  completed: false
+  recorded: false
+  duration: 1
