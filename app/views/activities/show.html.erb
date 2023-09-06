@@ -1,2 +1,9 @@
-<h1>Activities#show</h1>
-<p>Find me in app/views/activities/show.html.erb</p>
+<div>
+  <h1>Activity</h1>
+  Name: <%= @activity.name %><br>
+  Data Name: <%= @activity.data_name %><br>
+  Action Type: <%= @activity.action_type %><br>
+  Status: <%= @activity.status %><br>
+  Include Duration:  <%= @activity.includes_duration %><br>
+  Include Content:  <%= @activity.includes_content %><br>
+</div>

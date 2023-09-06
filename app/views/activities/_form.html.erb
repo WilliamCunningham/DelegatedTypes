@@ -1,0 +1,36 @@
+<%= form_with model: activity do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, autofocus: true %>
+  </div>
+
+
+  <div>
+    <%= form.label :data_name %>
+    <%= form.text_field :data_name %>
+  </div>
+  
+  <div>
+    <%= form.label :action_type %>
+    <%= form.text_field :action_type %> 
+  </div>
+
+  <div>
+    <%= form.label :includes_duration %>
+    <%= form.check_box :includes_duration %> 
+  </div>
+  
+  
+  <div>
+    <%= form.label :includes_content %>
+    <%= form.check_box :includes_content %> 
+  </div>
+
+  <div>
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+ 
+
+  <%= form.submit%> 
+<% end %>

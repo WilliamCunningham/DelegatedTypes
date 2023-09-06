@@ -15,31 +15,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_202125) do
     t.integer "user_id", null: false
     t.string "name"
     t.string "data_name"
-    t.string "action_type"
-    t.string "status"
-    t.boolean "includes_duration"
-    t.boolean "includes_content"
+    t.string "action_type", default: "BooleanEntry"
+    t.string "status", default: "active"
+    t.boolean "includes_duration", default: false
+    t.boolean "includes_content", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "boolean_entries", force: :cascade do |t|
-    t.string "name"
-    t.datetime "performed_at"
     t.boolean "completed"
-    t.boolean "recorded"
-    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "datum_entries", force: :cascade do |t|
-    t.string "name"
-    t.datetime "performed_at"
     t.boolean "completed"
-    t.boolean "recorded"
-    t.integer "duration"
     t.integer "datum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,10 +41,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_202125) do
     t.integer "activity_id_id", null: false
     t.datetime "performed_at"
     t.integer "duration"
-    t.boolean "recorded"
+    t.string "status", default: "open"
+    t.bigint "entryable_id"
+    t.string "entryable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id_id"], name: "index_entries_on_activity_id_id"
+    t.index ["entryable_id", "entryable_type"], name: "index_entries_on_entryable_id_and_entryable_type"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "articles#index"
+  root to: "main#index"
   resources :activities
   resources :entries
+  resources :user
 end

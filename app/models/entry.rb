@@ -1,4 +1,5 @@
 class Entry < ApplicationRecord
+  enum :status, %w[open completed skipped], validate: true 
   belongs_to :activity_id
   has_rich_text :content
   delegated_type :entryable, types: %w[BooleanEntry DatumEntry]
@@ -9,5 +10,5 @@ class Entry < ApplicationRecord
   delegate :includes_content, to: :activity 
   delegate :includes_duration, to: :activity
   
-  validates :performed_at, presence: true, if: :recorded
+  validates :performed_at, presence: true, if: :completed
 end

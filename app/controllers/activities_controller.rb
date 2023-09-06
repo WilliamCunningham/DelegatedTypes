@@ -6,11 +6,14 @@ class ActivitiesController < ApplicationController
 
   def show; end
 
-  def new; end
+  def new
+    @activity = Activity.new
+  end
 
   def edit; end
 
   def create
+    current_user = User.find(1)
     @activity = current_user.activities.build(activity_params)
     respond_to do |format|
       if @activity.save
@@ -46,8 +49,7 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:name, :data_name, :action_type, :status, :includes_duration,
-                                     :includes_content, with_defaults(user: current_user))
+    params.require(:activity).permit(:name, :data_name, :action_type, :status, :includes_duration, :includes_content)
   end
 end
 
