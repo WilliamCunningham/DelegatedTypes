@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README file is my definition of Rails ActiveRecord::DelegatedType.
 
-Things you may want to cover:
+Rails provides different methods to create class relationships or associations including belongs_to, has_one, has_many, has_many :through, and has_and_belongs_to_many. In addition, Rails includes Polymorphic associations, Self Joins, Single Table Inheritance, and Delegated Types. 
 
-* Ruby version
+**Polymorphic Associations** allows a model to belong to (belongs_to) multiple models through a polymorphic join (classable_id and classable_type) fields rather than through the primary id. An example is having a Image class belongs to Employee, Product and Blog classes. This allows you to retrieve images for Employee (@user.images) or Product (@product.images).
 
-* System dependencies
+**accepts_nested_attributes_for** is available for **delegated_type** associations (see this [PR](https://github.com/rails/rails/pull/41717)) This replaces writing specific methods like:
 
-* Configuration
+```
+class Entry < ApplicationRecord
+  delegated_type :entryable, types: %w[ Message Comment ]
 
-* Database creation
+  def self.create_with_comment(content, creator: Current.user)
+    create! entryable: Comment.new(content: content), creator: creator
+  end
+end
+```
+with:
+```
+class Entry < ApplicationRecord
+  delegated_type :entryable, types: %w[ Message Comment ]
+  accepts_nested_attributes_for :entryable
+end
 
-* Database initialization
+params = { entry: { entryable_type: 'Comment', entryable_attributes: { content: 'Smiling' } } }
+entry = Entry.create(params[:entry])
+```
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

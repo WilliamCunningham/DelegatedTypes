@@ -1,8 +1,9 @@
 <div>
   <h1>Activities#index</h1>
-  <ol>
+  <ul style="list-style-type:none">
     <%= render @activities %>
-  </ol>
+  </ul>
 
   <%= link_to 'new', new_activity_path %>
+  <%= link_to 'entries', entries_path %>
 </div>

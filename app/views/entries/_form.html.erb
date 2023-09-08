@@ -1,0 +1,22 @@
+<%= form_with model: entry do |form| %>
+  <%= form.hidden_field :activity_id %>
+  <%= form.hidden_field :entryable_type %>
+  
+  <div>
+    <%= form.label :performed_at %>
+    <%= form.datetime_local_field :performed_at %> 
+  </div>
+
+  <% unless entry.nil? %>
+    <div>
+      <%= form.label :status %>
+      <%= form.select :status, [:pending, :finished, :skipped] %>
+    </div>
+  <% end%>
+
+  <%= form.fields_for :entryable_attributes, entry.entryable do |ff| %>  
+    <%= render partial: "entries/entryables/form/#{entry.entryable_name}", locals: { ff: ff} %>
+  <% end %>
+
+  <%= form.submit %> 
+<% end %>

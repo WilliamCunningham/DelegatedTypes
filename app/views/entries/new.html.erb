@@ -1,2 +1,8 @@
-<h1>Entries#new</h1>
-<p>Find me in app/views/entries/new.html.erb</p>
+<div>
+  <h1>New Entry</h1>
+
+  <%= render partial: "form", locals: { entry: @entry, data_name: @data_name } %>
+  <hr>
+  <%= link_to "Activities", activities_path %>
+  <%= link_to "Entries", entries_path %>
+</div>

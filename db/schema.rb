@@ -25,29 +25,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_202125) do
   end
 
   create_table "boolean_entries", force: :cascade do |t|
-    t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "datum_entries", force: :cascade do |t|
-    t.boolean "completed"
     t.integer "datum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "entries", force: :cascade do |t|
-    t.integer "activity_id_id", null: false
+    t.integer "activity_id", null: false
+    t.string "entryable_type"
+    t.integer "entryable_id"
     t.datetime "performed_at"
     t.integer "duration"
-    t.string "status", default: "open"
-    t.bigint "entryable_id"
-    t.string "entryable_type"
+    t.bigint "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activity_id_id"], name: "index_entries_on_activity_id_id"
-    t.index ["entryable_id", "entryable_type"], name: "index_entries_on_entryable_id_and_entryable_type"
+    t.index ["activity_id"], name: "index_entries_on_activity_id"
+    t.index ["entryable_type", "entryable_id"], name: "index_entries_on_entryable"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,5 +57,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_202125) do
   end
 
   add_foreign_key "activities", "users"
-  add_foreign_key "entries", "activity_ids"
+  add_foreign_key "entries", "activities"
 end

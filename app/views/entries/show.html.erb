@@ -1,2 +1,11 @@
-<h1>Entries#show</h1>
-<p>Find me in app/views/entries/show.html.erb</p>
+<div>
+  <h1><%= @entry.name %></h1>
+  Entry Type: <%= @entry.entryable_type %><br>
+  Performed At: <%= @entry.performed_at %><br>
+  Duration: <%= @entry.duration %><br>
+  Status: <%= @entry.status %><br>
+  <%= render "entries/entryables/show/#{@entry.entryable_name}", entry: @entry %>
+  <hr>
+  <%= link_to 'edit', edit_entry_path(@entry) %>
+  <%= link_to 'entries', entries_path %>
+</div>

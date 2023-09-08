@@ -1,2 +1,9 @@
-<h1>Entries#index</h1>
-<p>Find me in app/views/entries/index.html.erb</p>
+<div>
+  <h1>Entries#index</h1>
+  <ul style="list-style-type:none">
+    <%= render @entries %>
+  </ul>  
+  
+  <%= link_to 'activities', activities_path %>
+</div>
+

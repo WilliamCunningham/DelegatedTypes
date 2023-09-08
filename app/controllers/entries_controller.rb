@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  include ActiveSupport::Inflector
   before_action :set_entry, only: %i[show edit update destroy]
   def index
     @entries = Entry.all
@@ -6,12 +7,16 @@ class EntriesController < ApplicationController
 
   def show; end
 
-  def new; end
+  def new
+    @activity = Activity.find(params[:activity_id])
+    @data_name = @activity.data_name
+    @entry = @activity.entries.build(entryable_type: @activity.action_type.constantize)
+  end
 
   def edit; end
 
   def create
-    @entry = current_user.entries.build(entry_params)
+    @entry = Entry.new(entry_params)
     respond_to do |format|
       if @entry.save
         format.html { redirect_to entry_url(@entry), notice: 'Entry was successfully created.' }
@@ -46,8 +51,6 @@ class EntriesController < ApplicationController
   end
 
   def entry_params
-    params.require(:entry).permit(:activity_id, :performed_at, :duration, :recorded, 
-                                  boolean_entries_attributes: %[:completed],
-                                  datum_entries_attributes: %[:completed, :datum])
+    params.require(:entry).permit(:activity_id, :performed_at, :duration, :status, :entryable_id, :entryable_type,  entryable_attributes: %i[datum] )
   end
 end
